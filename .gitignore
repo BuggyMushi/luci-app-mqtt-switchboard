@@ -1,0 +1,18 @@
+# Local development notes
+DEV_NOTES.md
+
+# Build artifacts & package outputs
+*.ipk
+*.apk
+bin/
+build/
+ipkg-*/
+
+# Editor and OS temporary files
+*~
+*.swp
+*.bak
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

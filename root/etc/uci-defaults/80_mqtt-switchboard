@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# Ensure config file exists
+if [ ! -f /etc/config/mqtt-switchboard ]; then
+	touch /etc/config/mqtt-switchboard
+fi
+
+exit 0
