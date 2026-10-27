@@ -85,6 +85,12 @@ jobs:
           sha256sum * > SHA256SUMS.txt
           ls -lh
 
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: luci-app-packages
+          path: dist/*
+
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
