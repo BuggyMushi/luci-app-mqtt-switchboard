@@ -1,0 +1,173 @@
+msgid ""
+msgstr "Content-Type: text/plain; charset=UTF-8\n"
+
+msgid "MQTT Switchboard"
+msgstr "MQTT 继电器控制板"
+
+msgid "Overview"
+msgstr "运行概况"
+
+msgid "Settings"
+msgstr "参数设置"
+
+msgid "MQTT Switchboard - Overview"
+msgstr "MQTT 继电器控制板 - 运行概况"
+
+msgid "Real-time system diagnostics, daemon status, and direct portal navigation."
+msgstr "实时系统诊断、守护进程状态与快速控制入口。"
+
+msgid "Service Status"
+msgstr "服务运行状态"
+
+msgid "Procd Daemon"
+msgstr "Procd 守护进程"
+
+msgid "Checking..."
+msgstr "检查中..."
+
+msgid "MQTT Broker Connection"
+msgstr "MQTT Broker 连接状态"
+
+msgid "Service Version"
+msgstr "服务版本"
+
+msgid "Service Uptime"
+msgstr "连续运行时间"
+
+msgid "Discovered Relays & Switches"
+msgstr "已发现继电器与开关"
+
+msgid "Active Web Sessions"
+msgstr "活跃连接 Session"
+
+msgid "Switchboard Dashboard Portals"
+msgstr "控制台直达入口"
+
+msgid "Open Full Dashboard"
+msgstr "打开完整控制台"
+
+msgid "Open E-Ink / Paper Mode (?eink=1)"
+msgstr "打开电子墨水屏低耗能模式 (?eink=1)"
+
+msgid "Open Kindle / Low-Bandwidth Mode (/lite)"
+msgstr "打开 Kindle / 旧型墨水屏轻量模式 (/lite)"
+
+msgid "Notice: "
+msgstr "提示："
+
+msgid "The listen address is currently configured as 127.0.0.1 (localhost only). If direct portal access from your LAN fails, please navigate to Settings and change Listen Address to 0.0.0.0."
+msgstr "当前监听地址设置为 127.0.0.1（仅限本机访问）。若您无法从局域网电脑打开控制台，请至“参数设置”页面将监听地址改为 0.0.0.0。"
+
+msgid "RUNNING"
+msgstr "运行中"
+
+msgid "DISABLED IN SETTINGS"
+msgstr "已在设置中禁用"
+
+msgid "STOPPED"
+msgstr "已停止"
+
+msgid "CONNECTED"
+msgstr "已连接"
+
+msgid "DISCONNECTED / CONNECTING"
+msgstr "未连接 / 连接中"
+
+msgid "DAEMON ACTIVE (Direct API unreachable via browser)"
+msgstr "进程运行中（浏览器无法直接调用 API）"
+
+msgid "MQTT Switchboard - Settings"
+msgstr "MQTT 继电器控制板 - 参数设置"
+
+msgid "Configuration for Mushi MQTT Switchboard daemon and web dashboard."
+msgstr "Mushi MQTT Switchboard 守护进程与 Web 控制台配置。"
+
+msgid "Configuration Options"
+msgstr "配置选项"
+
+msgid "General"
+msgstr "常规设置"
+
+msgid "MQTT Broker"
+msgstr "MQTT 代理服务器"
+
+msgid "Dashboard & Security"
+msgstr "控制台与安全"
+
+msgid "Enable Service"
+msgstr "启用服务"
+
+msgid "Enable or disable background execution of the mqtt-switchboard daemon."
+msgstr "启用或禁用 mqtt-switchboard 守护进程的开机自动启动。"
+
+msgid "Listen Address"
+msgstr "监听地址"
+
+msgid "IP address to bind the web server. Use 127.0.0.1 for local/reverse-proxy only, or 0.0.0.0 to allow LAN access."
+msgstr "Web 服务器监听 IP。设为 127.0.0.1 仅限本机/反向代理，设为 0.0.0.0 允许局域网访问。"
+
+msgid "Listen Port"
+msgstr "监听端口"
+
+msgid "TCP port on which the web dashboard and REST API listen."
+msgstr "Web 控制台与 REST API 监听的 TCP 端口。"
+
+msgid "Discovery Prefix"
+msgstr "自动发现前缀"
+
+msgid "Home Assistant MQTT auto-discovery topic prefix (default: homeassistant)."
+msgstr "Home Assistant MQTT 自动发现的主题前缀（默认：homeassistant）。"
+
+msgid "Relay Debounce (ms)"
+msgstr "继电器防抖延迟 (毫秒)"
+
+msgid "Debounce protection time in milliseconds to prevent relay chatter."
+msgstr "继电器防抖保护时间（毫秒），防止频繁切换硬件开关。"
+
+msgid "Broker URL"
+msgstr "Broker 服务器地址"
+
+msgid "Full URL to MQTT Broker, e.g. tcp://127.0.0.1:1883 or ssl://broker.lan:8883."
+msgstr "MQTT Broker 完整地址，例如 tcp://127.0.0.1:1883 或 ssl://broker.lan:8883。"
+
+msgid "Client ID"
+msgstr "客户端标识 (Client ID)"
+
+msgid "MQTT Client ID reported to the broker upon connection."
+msgstr "连接至 MQTT Broker 时上报的客户端标识。"
+
+msgid "Broker Username"
+msgstr "Broker 用户名"
+
+msgid "Username for MQTT authentication (leave empty if anonymous is permitted)."
+msgstr "MQTT 认证用户名（若允许匿名连接请留空）。"
+
+msgid "Broker Password"
+msgstr "Broker 密码"
+
+msgid "Password for MQTT authentication (leave empty if not required)."
+msgstr "MQTT 认证密码（若无密码请留空）。"
+
+msgid "Session Duration (Days)"
+msgstr "登录会话有效天数 (Days)"
+
+msgid "Number of days web session tokens remain valid before re-login is required."
+msgstr "Web 登录 Session Cookie 的有效天数，过期后需重新登录。"
+
+msgid "Require HTTPS Cookies (Secure Cookie)"
+msgstr "仅限 HTTPS 传输 Cookie (Secure Cookie)"
+
+msgid "When enabled, session cookies will only be transmitted via HTTPS. Leave UNCHECKED if accessing over plain HTTP (:8080) to prevent browser rejection."
+msgstr "启用后，浏览器仅会在 HTTPS 连接下发送 Session Cookie。若通过纯 HTTP (:8080) 访问请务必保持关闭，否则登录将被浏览器拒绝。"
+
+msgid "Dashboard User Accounts"
+msgstr "控制台登录账号"
+
+msgid "Configure web dashboard user credentials. Multiple users can be added here."
+msgstr "设置 Web 控制台的登录账号与密码，支持在此新增多个用户。"
+
+msgid "Username"
+msgstr "用户名"
+
+msgid "Password"
+msgstr "密码"

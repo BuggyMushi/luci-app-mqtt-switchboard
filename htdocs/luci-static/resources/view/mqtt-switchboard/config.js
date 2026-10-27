@@ -75,19 +75,6 @@ return view.extend({
 		o.rmempty = true;
 
 		// --- TAB: Dashboard & Security ---
-		o = s.taboption('security', form.Value, 'admin_user', _('Admin Username'),
-			_('Administrator username for logging into the Switchboard dashboard.'));
-		o.default = 'admin';
-		o.placeholder = 'admin';
-		o.rmempty = false;
-
-		o = s.taboption('security', form.Value, 'admin_password', _('Admin Password'),
-			_('Administrator password for logging into the Switchboard dashboard. Plain text or bcrypt hash supported.'));
-		o.password = true;
-		o.default = 'admin';
-		o.placeholder = 'admin';
-		o.rmempty = false;
-
 		o = s.taboption('security', form.Value, 'session_timeout', _('Session Duration (Days)'),
 			_('Number of days web session tokens remain valid before re-login is required.'));
 		o.datatype = 'uinteger';
@@ -98,6 +85,21 @@ return view.extend({
 		o = s.taboption('security', form.Flag, 'cookie_secure', _('Require HTTPS Cookies (Secure Cookie)'),
 			_('When enabled, session cookies will only be transmitted via HTTPS. Leave UNCHECKED if accessing over plain HTTP (:8080) to prevent browser rejection.'));
 		o.default = o.disabled;
+		o.rmempty = false;
+
+		// --- Multi-User Management Section ---
+		var su = m.section(form.GridSection, 'user', _('Dashboard User Accounts'),
+			_('Configure web dashboard user credentials. Multiple users can be added here.'));
+		su.anonymous = true;
+		su.addremove = true;
+
+		o = su.option(form.Value, 'username', _('Username'));
+		o.placeholder = 'admin';
+		o.rmempty = false;
+
+		o = su.option(form.Value, 'password', _('Password'));
+		o.password = true;
+		o.placeholder = 'password';
 		o.rmempty = false;
 
 		return m.render();

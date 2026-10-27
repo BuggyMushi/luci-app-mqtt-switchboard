@@ -58,6 +58,7 @@ return view.extend({
 		var targetHost = (listenAddr === '0.0.0.0' || listenAddr === '127.0.0.1') ? clientHost : listenAddr;
 		var portalUrl = 'http://' + targetHost + ':' + listenPort + '/';
 		var einkUrl = 'http://' + targetHost + ':' + listenPort + '/?eink=1';
+		var liteUrl = 'http://' + targetHost + ':' + listenPort + '/lite';
 
 		var viewRoot = E('div', { 'class': 'cbi-map' }, [
 			E('h2', {}, _('MQTT Switchboard - Overview')),
@@ -113,7 +114,15 @@ return view.extend({
 						'target': '_blank',
 						'rel': 'noreferrer',
 						'style': 'padding: 10px 18px; font-size: 14px; text-decoration: none;'
-					}, '📟 ' + _('Open E-Ink / Paper Mode (?eink=1)'))
+					}, '📟 ' + _('Open E-Ink / Paper Mode (?eink=1)')),
+
+					E('a', {
+						'class': 'btn cbi-button-neutral',
+						'href': liteUrl,
+						'target': '_blank',
+						'rel': 'noreferrer',
+						'style': 'padding: 10px 18px; font-size: 14px; text-decoration: none;'
+					}, '📖 ' + _('Open Kindle / Low-Bandwidth Mode (/lite)'))
 				]),
 				(listenAddr === '127.0.0.1') ? E('div', { 'class': 'alert-message warning', 'style': 'margin-top: 15px;' }, [
 					E('strong', {}, _('Notice: ')),
