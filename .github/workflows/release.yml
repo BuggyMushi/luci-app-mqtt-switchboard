@@ -17,7 +17,7 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Prepare Package Files
+      - name: Build Packages
         run: |
           TAG_NAME="${GITHUB_REF_NAME:-v1.0.0}"
           VERSION="${TAG_NAME#v}"
@@ -33,26 +33,26 @@ jobs:
           chmod 755 build/ipk_data/etc/uci-defaults/80_mqtt-switchboard
 
           # 2. Build control file for IPK (OpenWrt 24.10 and earlier)
-          cat <<EOF > build/ipk_control/control
-Package: luci-app-mqtt-switchboard
-Version: ${VERSION}-1
-Depends: luci-base
-Section: luci
-Architecture: all
-Priority: optional
-Maintainer: OpenWrt Community Developer
-Description: LuCI web interface for Mushi MQTT Switchboard
-EOF
+          {
+            echo "Package: luci-app-mqtt-switchboard"
+            echo "Version: ${VERSION}-1"
+            echo "Depends: luci-base"
+            echo "Section: luci"
+            echo "Architecture: all"
+            echo "Priority: optional"
+            echo "Maintainer: OpenWrt Community Developer"
+            echo "Description: LuCI web interface for Mushi MQTT Switchboard"
+          } > build/ipk_control/control
 
           # Create postinst to automatically refresh rpcd and flush cache
-          cat << 'EOF' > build/ipk_control/postinst
-#!/bin/sh
-[ -n "${IPKG_INSTROOT}" ] || {
-    /etc/init.d/rpcd restart 2>/dev/null || true
-    rm -rf /tmp/luci-* 2>/dev/null || true
-}
-exit 0
-EOF
+          {
+            echo '#!/bin/sh'
+            echo '[ -n "${IPKG_INSTROOT}" ] || {'
+            echo '    /etc/init.d/rpcd restart 2>/dev/null || true'
+            echo '    rm -rf /tmp/luci-* 2>/dev/null || true'
+            echo '}'
+            echo 'exit 0'
+          } > build/ipk_control/postinst
           chmod 755 build/ipk_control/postinst
 
           # 3. Create IPK archive (standard gzip-compressed tar)
@@ -65,18 +65,18 @@ EOF
           # 4. Create APK archive (OpenWrt 25.12+)
           mkdir -p build/apk_tree
           cp -r build/ipk_data/* build/apk_tree/
-          cat <<EOF > build/apk_tree/.PKGINFO
-pkgname = luci-app-mqtt-switchboard
-pkgver = ${VERSION}-r1
-pkgdesc = LuCI web interface for Mushi MQTT Switchboard
-url = https://github.com/${{ github.repository }}
-builddate = $(date +%s)
-packager = OpenWrt Community Developer
-size = $(du -sb build/apk_tree | cut -f1)
-arch = noarch
-license = MIT
-depend = luci-base
-EOF
+          {
+            echo "pkgname = luci-app-mqtt-switchboard"
+            echo "pkgver = ${VERSION}-r1"
+            echo "pkgdesc = LuCI web interface for Mushi MQTT Switchboard"
+            echo "url = https://github.com/${GITHUB_REPOSITORY:-BuggyMushi/luci-app-mqtt-switchboard}"
+            echo "builddate = $(date +%s)"
+            echo "packager = OpenWrt Community Developer"
+            echo "size = $(du -sb build/apk_tree | cut -f1)"
+            echo "arch = noarch"
+            echo "license = MIT"
+            echo "depend = luci-base"
+          } > build/apk_tree/.PKGINFO
 
           tar -czf "dist/luci-app-mqtt-switchboard-${VERSION}-r1.apk" -C build/apk_tree .
 
@@ -84,6 +84,12 @@ EOF
           cd dist
           sha256sum * > SHA256SUMS.txt
           ls -lh
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: luci-app-packages
+          path: dist/*
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
